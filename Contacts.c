@@ -6,20 +6,18 @@
 
 int main (void) {
     int contactSize = 0;
-    int maxSize = 5;
+    int maxSize = 1;
     //I'm using malloc to create an "array" in memory that stores the pointers to strings
     //I use char** to store the pointers of the contact names and phone numbers
     //I use sizeof(char*) instead of char because each element in char** is a pointer to a char. I'm allocating memory for the pointer itself
     char** contactNames = malloc(maxSize * sizeof(char*));
     char** contactNumbers = malloc(maxSize * sizeof(char*));
     bool running = true;
+    contactNames[contactSize] = malloc(30 * sizeof(char)); 
+    contactNumbers[contactSize] = malloc(15 * sizeof(char));
+
 
     while (running == true) {
-        //This allocates memory for each element within my memory "array", so each index or pointer that contactNames points to will house 30 bytes of memory
-        for (int i = contactSize; i < maxSize; i++) {
-            contactNames[i] = malloc(30 * sizeof(char)); 
-            contactNumbers[i] = malloc(15 * sizeof(char)); 
-        }
          //Displays my contacts
         for (int i = 0; i < contactSize; i++) {
             printf("Contact %i:\n", i + 1);
@@ -50,6 +48,20 @@ int main (void) {
                 strcpy(contactNames[contactSize], name);
                 strcpy(contactNumbers[contactSize], number);
                 contactSize++;
+            } else if (contactSize == maxSize) {
+                //Dymanically resizes our "memory arrays"
+                maxSize++;
+                contactNames = realloc(contactNames, maxSize * sizeof(char*));
+                contactNumbers = realloc(contactNumbers, maxSize * sizeof(char*));
+
+                //Allocates memory for the next index in my "memory array"
+                contactNames[contactSize] = malloc(30 * sizeof(char)); 
+                contactNumbers[contactSize] = malloc(15 * sizeof(char)); 
+
+                strcpy(contactNames[contactSize], name);
+                strcpy(contactNumbers[contactSize], number);
+                contactSize++;
+
             } else {
                 printf("\nFeature not implamented yet, contacts full\n");
             }
