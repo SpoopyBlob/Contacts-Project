@@ -1,4 +1,4 @@
-//Note: I won't be using structs within this code, I'm sticking to my learning plan and only using what I have learned to reinforce the knowledge that I have gained
+//Note: I won't be using structs within this code. I'm sticking to my learning plan and only using what I have learned to reinforce the knowledge that I have gained
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -10,9 +10,7 @@ void allocate_new_contact (char*** contactNames, char*** contactNumbers, int con
 int main (void) {
     int contactSize = 0;
     int maxSize = 1;
-    //I'm using malloc to create an "array" in memory that stores the pointers to strings
-    //I use char** to store the pointers of the contact names and phone numbers
-    //I use sizeof(char*) instead of char because each element in char** is a pointer to a char. I'm allocating memory for the pointer itself
+
     char** contactNames = malloc(maxSize * sizeof(char*));
     char** contactNumbers = malloc(maxSize * sizeof(char*));
     bool running = true;
